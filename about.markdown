@@ -1,17 +1,16 @@
 ---
-title: About
+title: Contact
 ---
-Nullam imperdiet sodales orci vitae molestie. Nunc quam orci, pharetra a
-rhoncus vitae, eleifend id felis. Suspendisse potenti. Etiam vitae urna orci.
-Quisque pellentesque dignissim felis, egestas tempus urna luctus vitae. In hac
-habitasse platea dictumst. Morbi fringilla mattis odio, et mattis tellus
-accumsan vitae.
 
-1. Amamus Unicode 碁
-2. Interdum nex magna.
+<img src="images/me.jpg" alt="me" width=130 class="textwrapleft"/>
+I currently work as a data scientist.
 
-Vivamus eget mauris sit amet nulla laoreet lobortis. Nulla in diam elementum
-risus convallis commodo. Cras vehicula varius dui vitae facilisis. Proin
-elementum libero eget leo aliquet quis euismod orci vestibulum. Duis rhoncus
-lorem consequat tellus vestibulum aliquam. Quisque orci orci, malesuada porta
-blandit et, interdum nec magna.
+Before that I did a PhD in mathematics on *Geometry of Numbers* and
+*Additive Combinatorics.*
+You can find my dissertation
+<a href="https://depositonce.tu-berlin.de/handle/11303/8744?mode=full">here.</a>
+
+I am interested in Bayesian statistics, software development, Machine
+Learning in general and am fluent in several programming language. These days I
+primarily work in Python with a little bit of R and Haskell and used C/C++,
+Java, Matlab in the past.
