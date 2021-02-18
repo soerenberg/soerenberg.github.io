@@ -1,5 +1,5 @@
 ---
-title: About
+title: Sören Berg, Ph.D.
 ---
 
 <img src="images/me.jpg" alt="me" width=130 class="textwrapleft"/>
