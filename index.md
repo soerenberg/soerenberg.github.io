@@ -13,19 +13,19 @@ My Ph.d. is in mathematics. You can find more on my past publications and academ
 
 Besides machine learning in general I am particularly interested in the following topics
 
-
-
-Bayesian inference,
-information theory,
-high-dimensional probability,
-functional programming.
+* Bayesian inference,
+* information theory,
+* high-dimensional probability,
+* functional programming.
 
 
 These days I primarily write code in **Python** but also have substantial experience in 
 
-R,
-C / C++,
-Haskell.
+* R,
+* SQL,
+* C / C++,
+* Haskell.
+
 Moreover, I used Matlab, Perl, and Mathematica in the past.
 
 
