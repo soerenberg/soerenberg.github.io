@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Sören Berg - PaC Exercise 2.6</title>
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css">
+        <link href="https://fonts.googleapis.com/css?family=Manrope" rel="stylesheet">
+    </head>
+        <body>
+        <div class="topnav">
+              <a href="../../../">Home</a>
+              <a href="../../../academia.html">Academia</a>
+              <a href="../../../contact.html">Contact</a>
+              <a href="../../../archive.html">Archive</a>
+              <a href="https://de.linkedin.com/in/soeren-berg"><i class="fa fa-linkedin"></i></a>
+              <a href="https://github.com/soerenberg"><i class="fa fa-github"></i></a>
+        </div>
+
+        <div id="content">
+
+            <h1>PaC Exercise 2.6</h1>
+
+            <div class="info">
+    Posted on February 18, 2021
+    
+</div>
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<h1 id="exercise-2.6">Exercise 2.6</h1>
+<p>Suppose that we independently roll two standard six-sided dice. Let <span class="math inline"><em>X</em><sub>1</sub></span> be the number that shows on the first die, <span class="math inline"><em>X</em><sub>2</sub></span> the number on the second die, and <span class="math inline"><em>X</em></span> the sum of the numbers on the two dice.</p>
+<ol type="a">
+<li>What is <span class="math inline"><em>E</em>[<em>X</em>|<em>X</em><sub>1</sub> is even]</span>?</li>
+</ol>
+<p><strong>Solution:</strong> By linearity</p>
+<p><br /><span class="math display">$$
+E[X | X_1 \text{ is even}] = E[X_1 | X_1 \text{ is even}] + E[X_2 | X_1 \text{ is even}]
+= \frac{2+4+6}{3} + \frac{7}{2} = \frac{15}{2} = 7.5.
+$$</span><br /></p>
+<p>Intuitively, this makes sense since we expect this expectation value to be slightly larger than <span class="math inline"><em>E</em>[<em>X</em>] = 7</span> since the even numbers are larger on average than the odd numbers on a standard die.</p>
+<ol start="2" type="a">
+<li>What is <span class="math inline"><em>E</em>[<em>X</em>|<em>X</em><sub>1</sub> = <em>X</em><sub>2</sub>]</span>?</li>
+</ol>
+<p>Note that if <span class="math inline"><em>X</em><sub>1</sub> = <em>X</em><sub>2</sub></span> then <span class="math inline"><em>X</em></span> is even. Thus,</p>
+<p><br /><span class="math display">$$
+E[X | X_1 = X_2] = \sum_{i=2}^{12} i \cdot P(X=i | X_1 = X_2) = \frac{2+4+\dots+12}{6} = 7.
+$$</span><br /></p>
+<p>Here we used that <span class="math inline"><em>P</em>(<em>X</em> = <em>i</em>|<em>X</em><sub>1</sub> = <em>X</em><sub>2</sub>) = 1/6</span> for even <span class="math inline"><em>i</em></span>.</p>
+<ol start="3" type="a">
+<li>What is <span class="math inline"><em>E</em>[<em>X</em><sub>1</sub>|<em>X</em> = 9]</span>?</li>
+</ol>
+<p>If <span class="math inline"><em>X</em> = 9</span> then there are the only <span class="math inline">4</span> possible values for <span class="math inline">(<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>)</span>: <span class="math inline">(3, 6), (4, 5), (5, 4), (6, 3)</span>. Thus,</p>
+<p><br /><span class="math display">$$
+E[X_1 | X=9] = \frac{3 + 4+ 5 + 6}{4} = \frac 9 2 = 4.5.
+$$</span><br /></p>
+<ol start="4" type="a">
+<li>What is <span class="math inline"><em>E</em>[<em>X</em><sub>1</sub> − <em>X</em><sub>2</sub>|<em>X</em> = <em>k</em>]</span> for <span class="math inline"><em>k</em></span> in the range <span class="math inline">[2, 12]</span>?</li>
+</ol>
+<p>Note that <span class="math inline"><em>X</em><sub>1</sub> − <em>X</em><sub>2</sub> ∈ { − 5, 4, …, 5}</span> and that <span class="math inline"><em>P</em>(<em>X</em><sub>1</sub> − <em>X</em><sub>2</sub> = <em>i</em>|<em>X</em> = <em>k</em>) = <em>P</em>(<em>X</em><sub>1</sub> − <em>X</em><sub>2</sub> =  − <em>i</em>|<em>X</em> = <em>k</em>)</span> for <span class="math inline"><em>i</em> ∈ { − 5, 4, …, 5}</span>. Therefore, we have</p>
+<p><br /><span class="math display">$$
+E[X_1 - X_2 | X=k] = \sum_{i=-5}^5 i \cdot P(X_1-X_2=i | X=k) = 0.
+$$</span><br /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>num_samples <span class="op">=</span> <span class="dv">10</span><span class="op">**</span><span class="dv">7</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>samples <span class="op">=</span> np.random.randint(low<span class="op">=</span><span class="dv">1</span>, high<span class="op">=</span><span class="dv">7</span>, size<span class="op">=</span>(num_samples, <span class="dv">2</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co"># part (a)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="bu">print</span>(<span class="ss">f&quot;sampled answer for (a): </span><span class="sc">{</span>samples[samples[:, <span class="dv">0</span>] <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>, :]<span class="sc">.</span><span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co"># part (b)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">sampled answer for (b): </span><span class="sc">{</span>samples[samples[:, <span class="dv">0</span>] <span class="op">==</span> samples[:, <span class="dv">1</span>], :]<span class="sc">.</span><span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co"># part (c)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">sampled answer for (b): </span><span class="sc">{</span>samples[samples.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> <span class="dv">9</span>][:, <span class="dv">0</span>]<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co"># part (d)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">sampled answer for (d)&quot;</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">13</span>):</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>    cond_samples <span class="op">=</span> samples[samples.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> k]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="ss">f&quot;k= </span><span class="sc">{k}</span><span class="ss">: </span><span class="sc">{</span>(cond_samples[:, <span class="dv">0</span>] <span class="op">-</span> cond_samples[:, <span class="dv">1</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>sampled answer for (a): 7.499272007332312
+
+sampled answer for (b): 7.00297383088835
+
+sampled answer for (b): 4.501544227521886
+
+sampled answer for (d)
+k= 2: 0.0
+k= 3: -0.000497820910275419
+k= 4: -0.00014398934478848565
+k= 5: 0.0037980995102071674
+k= 6: -0.0030300434929995917
+k= 7: -0.002319737212486128
+k= 8: 0.003350165815196208
+k= 9: 0.0030884550437718554
+k= 10: -0.0009050957853026369
+k= 11: 4.496265401957134e-05
+k= 12: 0.0</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+
+        </div>
+        <div id="footer">
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Sören Berg - PaC Exercise 3.6</title>
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css">
+        <link href="https://fonts.googleapis.com/css?family=Manrope" rel="stylesheet">
+    </head>
+        <body>
+        <div class="topnav">
+              <a href="../../../">Home</a>
+              <a href="../../../academia.html">Academia</a>
+              <a href="../../../contact.html">Contact</a>
+              <a href="../../../archive.html">Archive</a>
+              <a href="https://de.linkedin.com/in/soeren-berg"><i class="fa fa-linkedin"></i></a>
+              <a href="https://github.com/soerenberg"><i class="fa fa-github"></i></a>
+        </div>
+
+        <div id="content">
+
+            <h1>PaC Exercise 3.6</h1>
+
+            <div class="info">
+    Posted on February 18, 2021
+    
+</div>
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<h1 id="exercise-3.6">Exercise 3.6</h1>
+<p>For a coin that comes up head independently with probability <span class="math inline"><em>p</em></span> on each flip, what is the variance in the number of flips until the <span class="math inline"><em>k</em></span>th head appears?</p>
+<p><strong>Solution:</strong> Let <span class="math inline"><em>X</em></span> be the number of flips until the <span class="math inline"><em>k</em></span>th head appears and let <span class="math inline"><em>Y</em><sub><em>i</em></sub></span>, <span class="math inline"><em>i</em> = 1, …, <em>k</em></span>, be the number of throws until we see the <span class="math inline"><em>i</em></span>th head. Then each <span class="math inline"><em>Y</em><sub><em>i</em></sub></span> is geometric distributed with parameter <span class="math inline"><em>p</em></span> and all <span class="math inline"><em>Y</em><sub><em>i</em></sub></span>s are independent.</p>
+<p>Therefore,</p>
+<p><br /><span class="math display">$$
+\mathrm{Var}(X) = \sum_{i=1}^k \mathrm{Y_i} = k \frac{(1-p)}{p^2},
+$$</span><br /></p>
+<p>For example, for <span class="math inline"><em>k</em> = 11</span> and <span class="math inline"><em>p</em> = 0.35</span> this yields <span class="math inline">21.224…</span>. We verify this by simple sampling.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>num_samples <span class="op">=</span> <span class="dv">5</span><span class="op">*</span><span class="dv">10</span><span class="op">**</span><span class="dv">6</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>k<span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>p <span class="op">=</span> <span class="fl">0.35</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>samples <span class="op">=</span> np.random.choice(a<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1</span>], p<span class="op">=</span>[<span class="dv">1</span><span class="op">-</span>p, p], size<span class="op">=</span>num_samples)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>ith_heads <span class="op">=</span> np.cumsum(samples) <span class="op">%</span> k</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>seq <span class="op">=</span> np.array([k<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>indices <span class="op">=</span> np.where([np.array_equal(a, seq) </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>                    <span class="cf">for</span> a <span class="kw">in</span> np.stack([ith_heads[:<span class="op">-</span><span class="dv">1</span>], ith_heads[<span class="dv">1</span>:]], axis<span class="op">=</span><span class="dv">1</span>)])  <span class="co"># where do we see the $k$th head?</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>np.diff(np.c_[<span class="dv">0</span>, indices]).var()</span></code></pre></div>
+<pre><code>21.133861223328264</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+
+        </div>
+        <div id="footer">
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </div>
+    </body>
+</html>

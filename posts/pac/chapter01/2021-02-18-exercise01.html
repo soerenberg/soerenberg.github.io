@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Sören Berg - PaC Exercise 1.1</title>
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css">
+        <link href="https://fonts.googleapis.com/css?family=Manrope" rel="stylesheet">
+    </head>
+        <body>
+        <div class="topnav">
+              <a href="../../../">Home</a>
+              <a href="../../../academia.html">Academia</a>
+              <a href="../../../contact.html">Contact</a>
+              <a href="../../../archive.html">Archive</a>
+              <a href="https://de.linkedin.com/in/soeren-berg"><i class="fa fa-linkedin"></i></a>
+              <a href="https://github.com/soerenberg"><i class="fa fa-github"></i></a>
+        </div>
+
+        <div id="content">
+
+            <h1>PaC Exercise 1.1</h1>
+
+            <div class="info">
+    Posted on February 18, 2021
+    
+</div>
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<h1 id="exercise-1.1">Exercise 1.1</h1>
+<p>We flip a fair coin ten times. Find the probability of the following events.</p>
+<h2 id="a">(a)</h2>
+<p>The number of heads and the number of tails are equal.</p>
+<p>Let <span class="math inline"><em>N</em> = 10</span>. Then by simple combinatorics or using the Binomial distribution the desired probality is</p>
+<p><br /><span class="math display">$$
+{N \choose N/2} \left(\frac 1 2\right)^{N/2} \left(\frac 1 2\right)^{N/2}
+= {10 \choose 5} \frac{1}{2^{10}} = \frac{63}{256} = 0.24609\dots .
+$$</span><br /></p>
+<p>We can verify this empirically:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>N <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>num_samples <span class="op">=</span> <span class="dv">100000</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>samples <span class="op">=</span> np.random.randint(low<span class="op">=</span><span class="dv">0</span>, high<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span>(num_samples, N))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>(samples.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> N <span class="op">/</span> <span class="dv">2</span>).<span class="bu">sum</span>() <span class="op">/</span> <span class="bu">len</span>(samples)</span></code></pre></div>
+<pre><code>0.24615</code></pre>
+<h2 id="b">(b)</h2>
+<p>There are more heads than tails.</p>
+<p>Since the coin is fair this probability can be computed by symmetry as</p>
+<p><br /><span class="math display">$$
+\frac{1-p_1}{2},
+$$</span><br /></p>
+<p>where <span class="math inline"><em>p</em><sub>1</sub></span> denotes the probability found in part (a). Alternatively, it can be determined by using the binomial distribution:</p>
+<p><br /><span class="math display">$$
+\sum_{i=N/2+1}^N {N \choose i}\left(\frac 1 2\right)^N.
+$$</span><br /></p>
+<p>Both ways evaluate to <span class="math inline">193/512 = 0.37695…</span>.</p>
+<p>Again we check empirically:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>N <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>num_samples <span class="op">=</span> <span class="dv">100000</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>samples <span class="op">=</span> np.random.randint(low<span class="op">=</span><span class="dv">0</span>, high<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span>(num_samples, N))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>(samples.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">&gt;</span> N <span class="op">/</span> <span class="dv">2</span>).<span class="bu">sum</span>() <span class="op">/</span> <span class="bu">len</span>(samples)</span></code></pre></div>
+<pre><code>0.37536</code></pre>
+<h2 id="c">(c)</h2>
+<p>The <span class="math inline"><em>i</em></span>th flip and the <span class="math inline">(11 − <em>i</em>)</span>th flip are the same for <span class="math inline"><em>i</em> = 1, …, 5</span>.</p>
+<p>The probability that the <span class="math inline">(11 − <em>i</em>)</span>th flip equals the <span class="math inline"><em>i</em></span>th is <span class="math inline">1/2</span> for a single <span class="math inline"><em>i</em></span>. The event that this holds for all <span class="math inline"><em>i</em> = 1, …, 5</span> therefore is <span class="math inline">(1/2)<sup>5</sup> = 0.03125</span>.</p>
+<p>Again we check empirically:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>N <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>num_samples <span class="op">=</span> <span class="dv">100000</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>samples <span class="op">=</span> np.random.randint(low<span class="op">=</span><span class="dv">0</span>, high<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span>(num_samples, N))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>np.product([samples[:,i] <span class="op">==</span> samples[:, N<span class="op">-</span>i<span class="op">-</span><span class="dv">1</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)], axis<span class="op">=</span><span class="dv">0</span>).<span class="bu">sum</span>() <span class="op">/</span> <span class="bu">len</span>(samples)</span></code></pre></div>
+<pre><code>0.0317</code></pre>
+<h2 id="d">(d)</h2>
+<p>We flip at least four consecutive heads.</p>
+<p>Let <span class="math inline"><em>E</em><sub><em>i</em></sub>, <em>i</em> = 1, …, 7</span>, be the event that the first series of consecutive heads in the 10 tosses start at toss <span class="math inline"><em>i</em></span>. The probability of these events can than be computed quite easily. Note that beginning with <span class="math inline"><em>E</em><sub>5</sub></span> the probability are ever so slightly more difficult to compute.</p>
+<p>Another way is to solve this by recursion. Let <span class="math inline"><em>E</em><sub><em>N</em>, <em>i</em></sub></span> denote the event that in <span class="math inline"><em>N</em></span> tosses there occur at least <span class="math inline"><em>i</em></span> consecutive heads. Then, <span class="math inline"><em>P</em>(<em>E</em><sub><em>N</em>, <em>i</em></sub>) = 0</span> if <span class="math inline"><em>i</em> &gt; <em>N</em></span>. Otherwise, the probability of <span class="math inline"><em>P</em>(<em>E</em><sub><em>N</em>, <em>i</em></sub>)</span> can be split as follows. Either the <span class="math inline"><em>k</em></span> consecutive heads already occurred in the first <span class="math inline"><em>N</em> − 1</span> tosses <strong>or</strong> the first <span class="math inline"><em>N</em> − <em>i</em> − 1</span> tosses do not contain a consecutive series of <span class="math inline"><em>i</em></span> heads and the series of <span class="math inline"><em>n</em></span> heads (out of all <span class="math inline"><em>N</em></span> throws) start at toss <span class="math inline"><em>N</em> − <em>i</em></span>. This consideration yields</p>
+<p><br /><span class="math display">$$
+\begin{align*}
+P(E_{4,4}) &amp;= (1/2)^4,\\
+P(E_{5,4}) &amp;= P(E_{4,4}) + (1/2)^5 =(1/2)^4 + (1/2)^5,\\
+P(E_{6,4}) &amp;= P(E_{5,4}) + (1/2)^5 = (1/2)^3,\\
+P(E_{7,4}) &amp;= P(E_{6,4}) + (1/2)^5 = (1/2)^3 + (1/2)^5\\
+P(E_{8,4}) &amp;= P(E_{7,4}) + (1 - P(E_{3,4})(1/2)^5 = P(E_{7,4}) + (1/2)^5=(1/2)^3 + (1/2)^4\\
+P(E_{4,4}) &amp;= (1/2)^4,\\
+P(E_{9,4}) &amp;= P(E_{8,4}) + (1 - P(E_{4,4}) (1/2)^5 = (1/2)^3 + (1/2)^4 +(1-(1/2)^4) (1/2)^5\\
+P(E_{5,4}) &amp;= (1/2)^4 + (1/2)^5,\\
+P(E_{10,4}) &amp;= P(E_{9,4}) + (1 - P(E_{5,4})) (1/2)^5 = (1/2)^3 + (1/2)^4 +(1-(1/2)^4) (1/2)^5 + (1-(1/2)^4 + (1/2)^5) (1/2)^5.
+\end{align*}
+$$</span><br /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>N <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>num_samples <span class="op">=</span> <span class="dv">100000</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>samples <span class="op">=</span> np.random.randint(low<span class="op">=</span><span class="dv">0</span>, high<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span>(num_samples, N))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a><span class="kw">def</span> check_consecutive_head(sample, n<span class="op">=</span><span class="dv">4</span>):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>    current_max <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a>    current_streak <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> sample:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>        current_streak <span class="op">=</span> current_streak <span class="op">+</span> <span class="dv">1</span> <span class="cf">if</span> i <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>        current_max <span class="op">=</span> <span class="bu">max</span>(current_streak ,current_max)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a>    <span class="cf">return</span> current_max</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a>(np.array([check_consecutive_head(s) <span class="cf">for</span> s <span class="kw">in</span> samples]) <span class="op">&gt;=</span> <span class="dv">4</span>).<span class="bu">sum</span>() <span class="op">/</span> <span class="bu">len</span>(samples)</span></code></pre></div>
+<pre><code>0.24448</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+
+        </div>
+        <div id="footer">
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </div>
+    </body>
+</html>
