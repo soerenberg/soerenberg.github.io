@@ -3,11 +3,11 @@ title: Sören Berg, Ph.D.
 ---
 
 <img src="images/me.jpg" alt="me" width=130 class="textwrapleft"/>
-I currently work as a data scientist at Fit Analytics a Berlin-based e-commerce company and one of the world's leading companies to provide online sizing recommendations in fashion.
+I currently work as a data scientist at Fit Analytics, a Berlin-based e-commerce company and one of the world's leading companies to provide online sizing recommendations in fashion.
 
 
 
-My Ph.d. is in mathematics. You can find more on my past publications and academic work <a href="academia.html">here.</a>
+My Ph.D. is in mathematics. You can find more on my past publications and academic work <a href="academia.html">here.</a>
 
 
 
